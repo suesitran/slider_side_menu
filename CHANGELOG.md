@@ -1,3 +1,4 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Initial implementation.
 
-* TODO: Describe initial release.
+* Always align bottom
+* Direct Left to Right, or Right to Left
