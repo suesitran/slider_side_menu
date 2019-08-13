@@ -2,6 +2,10 @@
 
 Slider Side Menu that is hidden to the side of the screen, and only open when user taps on the controller button.
 
+## Demo
+
+![Sample Demo](https://github.com/suesitran/slider_side_menu/blob/master/screenrecord/demo.gif)
+
 ## How to use
 
 In your pubspec.yaml, include the package
