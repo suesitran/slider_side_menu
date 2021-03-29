@@ -138,7 +138,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
             0.0,
           ),
           child: Container(
-            color: Colors.teal,
+            color: widget._parentEndColor,
             height: viewHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
