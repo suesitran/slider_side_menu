@@ -8,14 +8,7 @@ Slider Side Menu that is hidden to the side of the screen, and only open when us
 
 ## How to use
 
-In your pubspec.yaml, include the package
-```
-dependencies:
-  flutter:
-    sdk: flutter
-
-  slider_side_menu: 0.0.1
-```
+In your pubspec.yaml, include the package [dependencies into your pubspec.yaml](https://flutter.dev/docs/development/packages-and-plugins/using-packages)
 
 In your code, add import
 ```

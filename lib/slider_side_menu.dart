@@ -14,8 +14,8 @@ class SliderSideMenu extends StatefulWidget {
   SliderSideMenu(
       {Color parentStartColor = Colors.pinkAccent,
         Color parentEndColor = Colors.teal,
-        @required List<MenuItem> childrenData,
-        @required String description,
+        required List<MenuItem> childrenData,
+        required String description,
       Direction direction = Direction.RTL})
       : _parentStartColor = parentStartColor,
         _parentEndColor = parentEndColor,
@@ -30,21 +30,20 @@ class SliderSideMenu extends StatefulWidget {
 }
 
 class MenuItem {
-  final Function onPressed;
+  final Function? onPressed;
   final Icon icon;
   final Widget label;
 
-  MenuItem({this.onPressed, this.icon, this.label})
-      : assert(icon != null && label != null);
+  MenuItem(this.icon, this.label, {this.onPressed});
 }
 
 class _SliderSideMenuState extends State<SliderSideMenu>
     with SingleTickerProviderStateMixin{
   bool isOpened = false;
-  AnimationController _animationController;
-  Animation<Color> _buttonColor;
-  Animation<double> _animateIcon;
-  Animation<double> _translateButton;
+  late AnimationController _animationController;
+  late Animation<Color?> _buttonColor;
+  late Animation<double> _animateIcon;
+  Animation<double>? _translateButton;
   Curve _curve = Curves.easeOut;
 
   final double viewHeight = 50;
@@ -133,7 +132,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
       children: <Widget>[
         Transform(
           transform: Matrix4.translationValues(
-            _translateButton.value,
+            _translateButton!.value,
             0.0,
             0.0,
           ),
@@ -166,9 +165,11 @@ class _SliderSideMenuState extends State<SliderSideMenu>
   }
 
   Widget _toMenuItemView(MenuItem item, int index) {
-    return FlatButton.icon(onPressed: () {
+    return TextButton.icon(onPressed: () {
       animate();
-      item.onPressed();
+      if (item.onPressed != null) {
+        item.onPressed!();
+      }
     }, icon: item.icon, label: item.label);
   }
 

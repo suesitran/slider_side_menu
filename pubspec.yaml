@@ -1,11 +1,11 @@
 name: slider_side_menu
 description: Slider Side Menu that is hidden to the side of the screen, and only open when user taps on the controller button.
-version: 0.0.1
+version: 0.1.0
 author: Suesi Tran <suesitran@gmail.com>
 homepage: https://github.com/suesitran/slider_side_menu
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:slider_side_menu/slider_side_menu.dart';
 
 void main() async {
+  await WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   await SystemChrome.setEnabledSystemUIOverlays(
