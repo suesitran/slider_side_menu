@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:slider_side_menu/slider_side_menu.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
   await SystemChrome.setEnabledSystemUIOverlays(
@@ -37,16 +37,18 @@ class _ExampleSliderSideMenuState extends State<ExampleSliderSideMenu> {
             ),
             SliderSideMenu(childrenData: [
               MenuItem(
-                  icon: Icon(Icons.thumb_up),
-                  label: Text("Thumb up"),
+                  Icon(Icons.thumb_up, color: Colors.white,),
+                  Text("Thumb up", style: TextStyle(color: Colors.white),),
                   onPressed: _thumbUp
               ),
               MenuItem(
-                  icon: Icon(Icons.thumb_down),
-                  label: Text("Thumb down"),
+                  Icon(Icons.thumb_down, color: Colors.white,),
+                  Text("Thumb down", style: TextStyle(color: Colors.white),),
                   onPressed: _thumbDown
               )
-            ], description: "Sample tooltip message")
+            ], description: "Sample tooltip message",
+              parentStartColor: Colors.teal,
+            )
           ],
         ),
       ),

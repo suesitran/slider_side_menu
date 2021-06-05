@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 enum Direction { LTR, RTL}
 
@@ -10,15 +9,18 @@ class SliderSideMenu extends StatefulWidget {
   final List<MenuItem> _childrenData;
   final String _description;
   final Direction _direction;
+  final Color _controlColor;
 
   SliderSideMenu(
       {Color parentStartColor = Colors.pinkAccent,
         Color parentEndColor = Colors.teal,
+        Color controlColor = Colors.white,
         required List<MenuItem> childrenData,
         required String description,
       Direction direction = Direction.RTL})
       : _parentStartColor = parentStartColor,
         _parentEndColor = parentEndColor,
+        _controlColor = controlColor,
         _childrenData = childrenData,
         _description = description,
         _direction = direction;
@@ -45,6 +47,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
   late Animation<double> _animateIcon;
   Animation<double>? _translateButton;
   Curve _curve = Curves.easeOut;
+  late Color _controlColor;
 
   final double viewHeight = 50;
 
@@ -68,6 +71,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
         curve: Curves.linear,
       ),
     ));
+    _controlColor = widget._controlColor;
 
     super.initState();
   }
@@ -104,7 +108,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
           child: IconButton(
             icon: RotationTransition(
               turns: _animateIcon,
-              child: Icon(widget._direction == Direction.RTL ? Icons.arrow_back_ios : Icons.arrow_forward_ios),
+              child: Icon(widget._direction == Direction.RTL ? Icons.arrow_back_ios : Icons.arrow_forward_ios, color: _controlColor,),
             ),
             onPressed: animate,
             tooltip: widget._description,)
@@ -153,7 +157,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
   List<Widget> _generateMenuItems() {
     List<Widget> items = [];
 
-    if (widget._childrenData != null && widget._childrenData.isNotEmpty) {
+    if (widget._childrenData.isNotEmpty) {
       for (int i = widget._childrenData.length; i > 0; i--) {
         items.add(_toMenuItemView(widget._childrenData[i - 1], i));
       }
