@@ -4,23 +4,26 @@ enum Direction { LTR, RTL}
 
 class SliderSideMenu extends StatefulWidget {
 
-  final Color _parentStartColor;
-  final Color _parentEndColor;
-  final List<MenuItem> _childrenData;
-  final String _description;
-  final Direction _direction;
-  final Color _controlColor;
+  final Color _controllerStartColor;  // side menu bg color when menu is collapsed
+  final Color _controllerEndColor;  // side menu bg color when menu is expanded
+  final List<MenuItem> _childrenData; // list of menu items
+  final String _description;  // tooltip description, for A11y use
+  final Direction _direction; // slide direction
+  final Color _handleIconColor; // arrow icon color, this does not change with animation
+  final Color _menuBackgroundColor; // background color of menu when expanded
 
   SliderSideMenu(
-      {Color parentStartColor = Colors.pinkAccent,
-        Color parentEndColor = Colors.teal,
-        Color controlColor = Colors.white,
+      {Color controllerStartColor = Colors.pinkAccent,
+        Color controllerEndColor = Colors.teal,
+        Color handleIconColor = Colors.white,
+        Color menuBackgroundColor = Colors.teal,
         required List<MenuItem> childrenData,
         required String description,
       Direction direction = Direction.RTL})
-      : _parentStartColor = parentStartColor,
-        _parentEndColor = parentEndColor,
-        _controlColor = controlColor,
+      : _controllerStartColor = controllerStartColor,
+        _controllerEndColor = controllerEndColor,
+        _handleIconColor = handleIconColor,
+        _menuBackgroundColor = menuBackgroundColor,
         _childrenData = childrenData,
         _description = description,
         _direction = direction;
@@ -47,7 +50,6 @@ class _SliderSideMenuState extends State<SliderSideMenu>
   late Animation<double> _animateIcon;
   Animation<double>? _translateButton;
   Curve _curve = Curves.easeOut;
-  late Color _controlColor;
 
   final double viewHeight = 50;
 
@@ -61,8 +63,8 @@ class _SliderSideMenuState extends State<SliderSideMenu>
     _animateIcon =
         Tween<double>(begin: 0.0, end: 180 / 360).animate(_animationController);
     _buttonColor = ColorTween(
-      begin: widget._parentStartColor,
-      end: widget._parentEndColor,
+      begin: widget._controllerStartColor,
+      end: widget._controllerEndColor,
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Interval(
@@ -71,7 +73,6 @@ class _SliderSideMenuState extends State<SliderSideMenu>
         curve: Curves.linear,
       ),
     ));
-    _controlColor = widget._controlColor;
 
     super.initState();
   }
@@ -108,7 +109,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
           child: IconButton(
             icon: RotationTransition(
               turns: _animateIcon,
-              child: Icon(widget._direction == Direction.RTL ? Icons.arrow_back_ios : Icons.arrow_forward_ios, color: _controlColor,),
+              child: Icon(widget._direction == Direction.RTL ? Icons.arrow_back_ios : Icons.arrow_forward_ios, color: widget._handleIconColor,),
             ),
             onPressed: animate,
             tooltip: widget._description,)
@@ -141,7 +142,7 @@ class _SliderSideMenuState extends State<SliderSideMenu>
             0.0,
           ),
           child: Container(
-            color: Colors.teal,
+            color: widget._menuBackgroundColor,
             height: viewHeight,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

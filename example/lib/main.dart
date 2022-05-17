@@ -37,17 +37,19 @@ class _ExampleSliderSideMenuState extends State<ExampleSliderSideMenu> {
             ),
             SliderSideMenu(childrenData: [
               MenuItem(
-                  Icon(Icons.thumb_up, color: Colors.white,),
-                  Text("Thumb up", style: TextStyle(color: Colors.white),),
+                  Icon(Icons.thumb_up),
+                  Text("Thumb up"),
                   onPressed: _thumbUp
               ),
               MenuItem(
-                  Icon(Icons.thumb_down, color: Colors.white,),
-                  Text("Thumb down", style: TextStyle(color: Colors.white),),
+                  Icon(Icons.thumb_down),
+                  Text("Thumb down"),
                   onPressed: _thumbDown
               )
             ], description: "Sample tooltip message",
-              parentStartColor: Colors.teal,
+              controllerStartColor: Colors.teal,
+              controllerEndColor: Colors.teal[900],
+              menuBackgroundColor: Colors.teal[900],
             )
           ],
         ),
